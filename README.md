@@ -34,23 +34,23 @@ A production-ready RESTful API for expense sharing built with Node.js, Express, 
 npm install
 ```
 
-### 2. Start MongoDB Replica Set
-
-MongoDB transactions require a replica set. Use Docker Compose:
-
-```bash
-docker-compose up -d
-```
-
-Wait ~30 seconds for the replica set to initialize.
-
-### 3. Configure Environment
+### 2. Configure Environment
 
 Copy `.env.example` to `.env` and update if needed:
 
 ```bash
 cp .env.example .env
 ```
+
+**Important:** Update `MONGODB_URI` in `.env` to point to your MongoDB instance.
+
+### 3. Start MongoDB
+
+You can use:
+
+- Local MongoDB installation
+- MongoDB Atlas (cloud)
+- Docker: `docker run -d -p 27017:27017 --name mongodb mongo:7`
 
 ### 4. Start Development Server
 
@@ -59,6 +59,8 @@ npm run dev
 ```
 
 Server will start on `http://localhost:3000`
+
+> **Note:** MongoDB transactions require a replica set. For development without transactions, the app will work but balance updates won't be atomic. For production, use MongoDB Atlas or configure a replica set.
 
 ## API Endpoints
 
